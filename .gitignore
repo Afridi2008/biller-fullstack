@@ -32,3 +32,4 @@ Thumbs.db
 npm-debug.log*
 # Local fallback database
 .db_fallback_data.json
+web-dist/
