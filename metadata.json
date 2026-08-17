@@ -1,0 +1,6 @@
+{
+  "name": "BILLER - Flex Print Management",
+  "description": "Smart Billing & Flex Printing Business Management system built with React JS, Python 3.10, FastAPI REST backend, and MongoDB real-time database integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
