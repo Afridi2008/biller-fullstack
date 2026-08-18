@@ -84,6 +84,20 @@ realtime_subscribers = []
 # Health & Tech Stack Inspection
 # ----------------------------------------------------
 @app.get("/api/health", summary="System Health & Tech Stack Info")
+@app.get("/api/debug/tls")
+async def debug_tls():
+    import ssl
+    import sys
+    import pymongo
+
+    return {
+        "python": sys.version,
+        "openssl": ssl.OPENSSL_VERSION,
+        "tls_minimum": str(ssl.TLSVersion.TLSv1_2),
+        "pymongo": pymongo.version,
+        "mongodb_uri_exists": bool(os.getenv("MONGODB_URI")),
+        "mongodb_uri_length": len(os.getenv("MONGODB_URI", "")),
+    }
 async def health_check():
     db_status = db_manager.get_status()
     return {
@@ -98,6 +112,7 @@ async def health_check():
         "mongo_status": db_status,
         "server_time": time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime()),
     }
+    
 # ----------------------------------------------------
 # MongoDB Database Endpoints
 # ----------------------------------------------------
