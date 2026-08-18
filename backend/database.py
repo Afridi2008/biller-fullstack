@@ -24,10 +24,12 @@ from pymongo import MongoClient
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ENV_FILE = os.path.join(BASE_DIR, ".env")
 
+# Load local .env if it exists.
+# Render/production uses environment variables directly.
 load_dotenv(ENV_FILE)
 
-MONGODB_URI = os.getenv("MONGODB_URI", "")
-DB_NAME = os.getenv("MONGODB_DB_NAME", "biller_db")
+MONGODB_URI = os.getenv("MONGODB_URI", "").strip()
+DB_NAME = os.getenv("MONGODB_DB_NAME", "biller_db").strip()
 
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
 
@@ -177,12 +179,14 @@ class MongoDatabaseManager:
 
             self.client = MongoClient(
                 self.uri,
-                serverSelectionTimeoutMS=10000,
-                connectTimeoutMS=10000,
-                socketTimeoutMS=10000,
+                tls=True,
+                tlsAllowInvalidCertificates=False,
+                serverSelectionTimeoutMS=15000,
+                connectTimeoutMS=15000,
+                socketTimeoutMS=15000,
                 retryWrites=True,
                 retryReads=True
-            )
+)
 
             start_time = time.time()
 
