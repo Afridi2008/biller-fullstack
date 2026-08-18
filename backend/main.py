@@ -32,6 +32,16 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
+@app.get("/api/debug/env")
+async def debug_env():
+    uri = os.getenv("MONGODB_URI", "")
+    return {
+        "mongodb_uri_exists": bool(uri),
+        "mongodb_uri_length": len(uri),
+        "mongodb_db_name": os.getenv("MONGODB_DB_NAME", ""),
+        "jwt_exists": bool(os.getenv("JWT_SECRET", ""))
+    }
+
 app.include_router(customers.router)
 app.include_router(products.router)
 app.include_router(bills.router)
