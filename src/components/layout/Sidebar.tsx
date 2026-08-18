@@ -108,7 +108,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, setMobileOpen }) =
           <div className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-100">
             <div className="flex items-center gap-2.5 min-w-0">
               <img
-                src={user?.avatarUrl || ''}
+                src={user?.avatarUrl || 'blob:https://web.whatsapp.com/2c2f2fac-b5c2-4257-9c81-f441415ae8e7'}
                 alt={user?.name || 'User'}
                 className="w-8 h-8 rounded-full object-cover ring-1 ring-slate-200 shrink-0"
               />
